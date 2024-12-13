@@ -1,75 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post - Social Media Platform</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Post - Connecto</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
     <header>
-          <nav>
-            <div class="logo">
-              <h1>Social Media</h1>
-            </div>
-            <ul>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="profile.html">Profile</a></li>
-              <li><a href="settings.html">Settings</a></li>
-            </ul>
-             <div class="search-bar">
-                 <input type="text" placeholder="Search...">
-                 <button>Search</button>
-             </div>
-          </nav>
-      </header>
+      <nav>
+        <div class="logo">
+          <a href="index.html">
+            <img src="images/logo.svg" alt="Connecto" />
+          </a>
+        </div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="settings.html">Settings</a></li>
+        </ul>
+        <div class="search-bar">
+          <input type="text" placeholder="Search..." />
+          <button>Search</button>
+        </div>
+      </nav>
+    </header>
 
     <main>
-        <div class="container">
-            <article class="post">
-              <header class="post-header">
-                  <div class="post-author-info">
-                      <img src="author_profile_pic.jpg" alt="Author's Profile Picture" class="post-author-pic">
-                      <h3 class="post-author-name">Author Name</h3>
-                  </div>
-                 <time class="post-date" datetime="2024-07-26">July 26, 2024</time>
-              </header>
-              <div class="post-content">
-                    <p>This is the post content.</p>
-                    <img src="post_image.jpg" alt="Post Image" class="post-image">
-                </div>
-                <footer class="post-footer">
-                  <button>Like</button>
-                  <button>Comment</button>
-                </footer>
-            </article>
-            <section class="comments">
-                <h3>Comments</h3>
-                <div class="comment">
-                    <p>Comment from User 1: This is great!</p>
-                </div>
-                 <div class="comment">
-                    <p>Comment from User 2: I agree.</p>
-                </div>
-                <!-- Dynamically add comments here -->
+      <div class="container">
+        <article class="post">
+          <header class="post-header">
+            <div class="post-author-info">
+              <img
+                src="author_profile_pic.jpg"
+                alt="Author's Profile Picture"
+                class="post-author-pic"
+              />
+              <h3 class="post-author-name">Author Name</h3>
+            </div>
+            <time class="post-date" datetime="2024-07-26">July 26, 2024</time>
+          </header>
+          <div class="post-content">
+            <p>This is the post content.</p>
+            <img src="post_image.jpg" alt="Post Image" class="post-image" />
+          </div>
+          <footer class="post-footer">
+            <button>Like</button>
+            <button>Comment</button>
+          </footer>
+        </article>
+        <section class="comments">
+          <h3>Comments</h3>
+          <div class="comment">
+            <p>Comment from User 1: This is great!</p>
+          </div>
+          <div class="comment">
+            <p>Comment from User 2: I agree.</p>
+          </div>
+          <!-- Dynamically add comments here -->
 
-                 <form class="comment-form">
-                      <textarea placeholder="Add a comment" ></textarea>
-                      <button type="submit">Post Comment</button>
-                 </form>
-            </section>
-        </div>
-
+          <form class="comment-form">
+            <textarea placeholder="Add a comment"></textarea>
+            <button type="submit">Post Comment</button>
+          </form>
+        </section>
+      </div>
     </main>
     <footer>
-         <p>© 2024 Social Media Platform. All rights reserved.</p>
-        <nav>
-              <ul>
-                   <li><a href="#">Terms of Service</a></li>
-                  <li><a href="#">Privacy Policy</a></li>
-             </ul>
-         </nav>
-     </footer>
+      <p>© 2024 Connecto. All rights reserved.</p>
+      <nav>
+        <ul>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </nav>
+    </footer>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

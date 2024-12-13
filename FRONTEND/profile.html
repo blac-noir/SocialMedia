@@ -1,71 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - Social Media Platform</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile - Connecto</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
     <header>
-          <nav>
-            <div class="logo">
-              <h1>Social Media</h1>
-            </div>
-            <ul>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="profile.html">Profile</a></li>
-              <li><a href="settings.html">Settings</a></li>
-            </ul>
-             <div class="search-bar">
-                  <input type="text" placeholder="Search...">
-                  <button>Search</button>
-               </div>
-          </nav>
-      </header>
+      <nav>
+        <div class="logo">
+          <a href="index.html">
+            <img src="images/logo.svg" alt="Connecto" />
+          </a>
+        </div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="settings.html">Settings</a></li>
+        </ul>
+        <div class="search-bar">
+          <input type="text" placeholder="Search..." />
+          <button>Search</button>
+        </div>
+      </nav>
+    </header>
     <main>
       <div class="container">
-          <section class="profile-info">
-            <div class="profile-header">
-                <img src="profile_cover.jpg" alt="Profile Cover" class="profile-cover">
-                <div class="profile-meta">
-                    <img src="profile_pic.jpg" alt="Profile Picture" class="profile-pic">
-                  <h2 class="profile-name">User Name</h2>
-                  <p class="profile-bio">User bio here...</p>
-                </div>
-
-             </div>
-             <div class="profile-stats">
-                <p><strong>Posts:</strong> <span id="profile-post-count">123</span></p>
-                <p><strong>Followers:</strong> <span id="profile-follower-count">456</span></p>
-                 <p><strong>Following:</strong> <span id="profile-following-count">789</span></p>
+        <section class="profile-info">
+          <div class="profile-header">
+            <img
+              src="profile_cover.jpg"
+              alt="Profile Cover"
+              class="profile-cover"
+            />
+            <div class="profile-meta">
+              <img
+                src="profile_pic.jpg"
+                alt="Profile Picture"
+                class="profile-pic"
+              />
+              <h2 class="profile-name">User Name</h2>
+              <p class="profile-bio">User bio here...</p>
             </div>
+          </div>
+          <div class="profile-stats">
+            <p>
+              <strong>Posts:</strong> <span id="profile-post-count">123</span>
+            </p>
+            <p>
+              <strong>Followers:</strong>
+              <span id="profile-follower-count">456</span>
+            </p>
+            <p>
+              <strong>Following:</strong>
+              <span id="profile-following-count">789</span>
+            </p>
+          </div>
+        </section>
+        <section class="user-posts">
+          <!-- Dynamically populated user post articles from javascript -->
+        </section>
 
-          </section>
-           <section class="user-posts">
-               <!-- Dynamically populated user post articles from javascript -->
-              </section>
-
-           <aside class="sidebar">
-                <h3>Followers</h3>
-                <ul id="follower-list">
-                   <li><img src="follower1_pic.jpg" alt="Follower 1">
-                       <span class="follower-username">Follower 1</span>
-                     </li>
-                    <!-- other followers here-->
-                </ul>
-            </aside>
-        </div>
+        <aside class="sidebar">
+          <h3>Followers</h3>
+          <ul id="follower-list">
+            <li>
+              <img src="follower1_pic.jpg" alt="Follower 1" />
+              <span class="follower-username">Follower 1</span>
+            </li>
+            <!-- other followers here-->
+          </ul>
+        </aside>
+      </div>
     </main>
     <footer>
-        <p>© 2024 Social Media Platform. All rights reserved.</p>
-        <nav>
-            <ul>
-                <li><a href="#">Terms of Service</a></li>
-                 <li><a href="#">Privacy Policy</a></li>
-           </ul>
-       </nav>
+      <p>© 2024 Connecto. All rights reserved.</p>
+      <nav>
+        <ul>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </nav>
     </footer>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

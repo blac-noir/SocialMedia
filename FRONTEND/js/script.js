@@ -3,11 +3,33 @@ import * as api from './api.js';
 import * as dom from './dom.js';
 import * as state from './state.js';
 import * as utils from './utils.js';
+import * as forms from './forms.js';
+import * as ui from './ui.js';
 
-// Home Page Specific Logic
+// Event listeners to show different modals
+document.addEventListener('click', function (event) {
+    if(event.target.classList.contains('login-button')){
+       ui.showModal(forms.createLoginForm());
+    }
+    if(event.target.classList.contains('register-button')){
+        ui.showModal(forms.createRegisterForm());
+    }
+    if (event.target.classList.contains('create-post-button')){
+         ui.showModal(forms.createPostForm());
+    }
+     if (event.target.classList.contains('edit-profile-button')){
+         //get user profile and create the edit profile form
+          loadEditProfileModal();
+    }
+});
+
+//Home Page Specific Logic
 async function loadHomePage(){
     if (document.querySelector('.feed')) { // Checks if it's the home page before applying logic
-      await loadPosts();
+         await loadPosts();
+        document.addEventListener('mouseover', handleTooltipShow); //enable tooltips for home page
+        document.addEventListener('mouseout', handleTooltipHide); //enable tooltips for home page
+
     }
 }
 async function loadPosts(page = 1) {
@@ -32,7 +54,6 @@ async function loadPosts(page = 1) {
         state.setAppState({ loading: false}); // Set loading to false once posts have loaded or in case of an error
     }
 }
-
 async function handleLikeClick(event) {
     // Handles liking a post
     if (event.target.classList.contains('like-button')) {
@@ -40,9 +61,11 @@ async function handleLikeClick(event) {
         try{
             await api.likePost(postId);
             // visual update for the like button if needed
-              console.log('Post liked successfully', postId);
+            console.log('Post liked successfully', postId);
+            ui.showTooltip(event.target, 'Liked!');
         } catch(error){
             console.error('Failed to like the post: ', error);
+              ui.showTooltip(event.target, 'Failed to like post!');
         }
     }
 }
@@ -53,6 +76,16 @@ async function handleCommentClick(event) {
       const postId = event.target.dataset.postId;
       window.location.href = `post.html?id=${postId}`; // Redirect to post page with the post id
     }
+}
+function handleTooltipShow(event){
+    if(event.target.classList.contains('like-button')){
+        ui.showTooltip(event.target, 'Like the Post')
+    } else if(event.target.classList.contains('comment-button')){
+        ui.showTooltip(event.target, 'Comment on this post')
+    }
+}
+function handleTooltipHide(){
+    ui.hideTooltip();
 }
 
 //Post Page Specific Logic
@@ -100,11 +133,12 @@ async function loadSinglePost(postId) {
 }
 
 // Profile Page specific logic
-
 async function loadProfilePage(){
   if(window.location.pathname.includes('profile.html')){
       await loadUserProfile();
-  }
+       document.addEventListener('mouseover', handleTooltipShow); //enable tooltips for profile page
+        document.addEventListener('mouseout', handleTooltipHide); //enable tooltips for profile page
+    }
 }
 async function loadUserProfile(){
     try {
@@ -136,6 +170,18 @@ async function loadUserProfile(){
          console.error('Failed to load profile: ', error);
     }
 }
+async function loadEditProfileModal(){
+    try {
+      // Hardcoded user id for demo purposes, replace when you have real users
+        const userId = 1;
+       const profile = await api.getUserProfile(userId);
+      ui.showModal(forms.createEditProfileForm(profile));
+    } catch(error){
+        console.error('Failed to load the edit profile modal: ', error);
+    }
+
+}
+
 
 // Settings Page Specific Logic
 async function loadSettingsPage() {
@@ -180,6 +226,7 @@ async function handleUpdateProfile(event){
     }
 }
 
+
 //Infinite Scroll Implementation
 function handleInfiniteScroll() {
     const scrollBottom = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -192,23 +239,20 @@ function handleInfiniteScroll() {
     }
 }
 
-
 // Initialize functionality on different pages
 function init(){
     loadHomePage();
     loadPostPage();
     loadProfilePage();
     loadSettingsPage();
-
-
-  // Add event listeners for global interactions
+    // close modal from button
+    ui.modalCloseButton.addEventListener('click', ui.handleCloseModal);
+    // Add event listeners for global interactions
     document.addEventListener('click', handleLikeClick);
     document.addEventListener('click', handleCommentClick);
 
-
     // Add infinite scrolling event
     window.addEventListener('scroll', handleInfiniteScroll);
-
 }
 
 init();

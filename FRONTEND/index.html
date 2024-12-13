@@ -1,81 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Social Media Platform</title>
-    <link rel="stylesheet" href="css/styles.css">  <!-- Link your CSS here -->
-</head>
-<body>
-  <header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - Connecto</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <!-- Link your CSS here -->
+  </head>
+  <body>
+    <header>
       <nav>
-        <div class="logo"> <!-- Could be an image or text -->
-            <h1>Social Media</h1>
+        <div class="logo">
+          <a href="index.html">
+            <img src="images/logo.svg" alt="Connecto" />
+          </a>
         </div>
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="settings.html">Settings</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="settings.html">Settings</a></li>
         </ul>
-         <div class="search-bar">
-             <input type="text" placeholder="Search...">
-              <button>Search</button>
-          </div>
+        <div class="search-bar">
+          <input type="text" class="search-input" placeholder="Search..." />
+          <button>Search</button>
+        </div>
+        <div class="auth-links">
+          <button class="login-button">Login</button>
+          <button class="register-button">Register</button>
+        </div>
       </nav>
-  </header>
+    </header>
 
     <main>
-        <div class="container">
-            <section class="feed">
-                <!-- Dynamically populated post articles using JavaScript -->
-                <!-- Example post structure -->
-                <article class="post">
-                  <header class="post-header">
-                      <div class="post-author-info">
-                          <img src="author_profile_pic.jpg" alt="Author's Profile Picture" class="post-author-pic">
-                          <h3 class="post-author-name">Author Name</h3>
-                        </div>
-                      <time class="post-date" datetime="2024-07-26">July 26, 2024</time>
-                  </header>
-                  <div class="post-content">
-                        <p>This is the post content.</p>
-                        <img src="post_image.jpg" alt="Post Image" class="post-image">
-                    </div>
-                  <footer class="post-footer">
-                        <button>Like</button>
-                        <button>Comment</button>
-                  </footer>
-                </article>
-                <!-- More articles dynamically added here -->
-              </section>
-            <aside class="sidebar">
-               <!-- Optional: Suggested Users, Trends, etc -->
-                <h3>Suggestions</h3>
-                <ul id="suggestion-list">
-                    <li><img src="suggested_pic.jpg" alt="Suggested User">
-                         <span class="suggested-username">User 1</span> <button>Follow</button>
-                    </li>
-                     <!-- more suggested users -->
-                </ul>
+      <div class="container">
+        <section class="feed">
+          <!-- Dynamically populated post articles using JavaScript -->
+          <!-- Example post structure -->
+          <article class="post">
+            <header class="post-header">
+              <div class="post-author-info">
+                <img
+                  src="author_profile_pic.jpg"
+                  alt="Author's Profile Picture"
+                  class="post-author-pic"
+                />
+                <h3 class="post-author-name">Author Name</h3>
+              </div>
+              <time class="post-date" datetime="2024-07-26">July 26, 2024</time>
+            </header>
+            <div class="post-content">
+              <p>This is the post content.</p>
+              <img src="post_image.jpg" alt="Post Image" class="post-image" />
+            </div>
+            <footer class="post-footer">
+              <button>Like</button>
+              <button>Comment</button>
+            </footer>
+          </article>
+          <!-- More articles dynamically added here -->
+        </section>
+        <aside class="sidebar">
+          <!-- Optional: Suggested Users, Trends, etc -->
+          <h3>Suggestions</h3>
+          <ul id="suggestion-list">
+            <li>
+              <img src="suggested_pic.jpg" alt="Suggested User" />
+              <span class="suggested-username">User 1</span>
+              <button>Follow</button>
+            </li>
+            <!-- more suggested users -->
+          </ul>
 
-                <h3>Trends</h3>
-                <ul id="trends-list">
-                    <li>Trend 1</li>
-                     <!-- more trends -->
-                </ul>
-            </aside>
+          <h3>Trends</h3>
+          <ul id="trends-list">
+            <li>Trend 1</li>
+            <!-- more trends -->
+          </ul>
+        </aside>
+      </div>
+      <!-- Modal Container (Hidden by Default) -->
+      <div id="modal-container" class="modal-container hidden">
+        <div class="modal-content">
+          <span class="modal-close">×</span>
+          <div id="modal-form-container">
+            <!-- Forms will be placed here dynamically by JavaScript -->
+          </div>
         </div>
+      </div>
+
+      <div class="tooltip" role="tooltip" aria-hidden="true"></div>
     </main>
 
     <footer>
-      <p>© 2024 Social Media Platform. All rights reserved.</p>
+      <p>© 2024 Connecto. All rights reserved.</p>
       <nav>
-          <ul>
-              <li><a href="#">Terms of Service</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-            </ul>
-          </nav>
+        <ul>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </nav>
     </footer>
-    <script src="script.js"></script> <!-- Link your main script here -->
-</body>
+    <script src="script.js"></script>
+    <!-- Link your main script here -->
+  </body>
 </html>
