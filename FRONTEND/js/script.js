@@ -10,9 +10,11 @@ import * as ui from './ui.js';
 document.addEventListener('click', function (event) {
     if(event.target.classList.contains('login-button')){
        ui.showModal(forms.createLoginForm());
+       console.log('login');
     }
     if(event.target.classList.contains('register-button')){
         ui.showModal(forms.createRegisterForm());
+        console.log('register');
     }
     if (event.target.classList.contains('create-post-button')){
          ui.showModal(forms.createPostForm());
