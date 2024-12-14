@@ -99,23 +99,3 @@ export {
   login,
   register,
 };
-
-
-// curl -X POST http://localhost:8080/sm-backend-1.0-SNAPSHOT/api/auth/register -H "Content-Type: application/json" -d '{"username": "testuser", "password": "testpassword", "email": "testuser@example.com"}'
-
-// async function readFileAsBytes(file) {
-//   return new Promise((resolve, reject) => {
-//     const reader = new FileReader();
-
-//     reader.onload = () => {
-//       // The result is an ArrayBuffer
-//       resolve(reader.result);
-//     };
-
-//     reader.onerror = () => {
-//       reject(new Error("Error reading file"));
-//     };
-
-//     reader.readAsArrayBuffer(file);
-//   });
-// }
