@@ -1,5 +1,5 @@
 // api.js
-const API_BASE_URL = "https://localhost:8080/api"; // Replace with your actual API base URL
+const API_BASE_URL = "http://localhost:8080/sm-backend-1.0-SNAPSHOT/api"; // Replace with your actual API base URL
 
 async function fetchData(url, options = {}) {
   // Wrapper for fetch to handle errors and base URL
@@ -75,7 +75,7 @@ async function login(email, password) {
   return fetchData("/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email: email, password: password }),
+    body: JSON.stringify({ email: "test@gmail.com", password: "1234" }),
   });
 }
 async function register(name, email, password) {
@@ -99,3 +99,23 @@ export {
   login,
   register,
 };
+
+
+// curl -X POST http://localhost:8080/sm-backend-1.0-SNAPSHOT/api/auth/register -H "Content-Type: application/json" -d '{"username": "testuser", "password": "testpassword", "email": "testuser@example.com"}'
+
+// async function readFileAsBytes(file) {
+//   return new Promise((resolve, reject) => {
+//     const reader = new FileReader();
+
+//     reader.onload = () => {
+//       // The result is an ArrayBuffer
+//       resolve(reader.result);
+//     };
+
+//     reader.onerror = () => {
+//       reject(new Error("Error reading file"));
+//     };
+
+//     reader.readAsArrayBuffer(file);
+//   });
+// }

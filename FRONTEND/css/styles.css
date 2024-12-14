@@ -95,6 +95,12 @@ header {
   box-shadow: var(--box-shadow);
   padding: var(--spacing-medium);
 }
+
+body > header {
+  position: fixed;
+  width: 100%;
+}
+
 header nav {
   display: flex;
   align-items: center;
@@ -132,6 +138,7 @@ header nav ul li a:hover {
 /* Main Content Grid */
 main {
   padding: var(--spacing-medium) 0;
+  padding-top: 81px; /* Add the height of the header */
 }
 
 /* Footer Styling */
@@ -382,6 +389,139 @@ footer nav ul li a {
   bottom: 1px;
 }
 
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal Container */
+.modal {
+  background: var(--color-white);
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  padding: var(--spacing-large);
+  position: relative;
+  transform: translateY(-20px);
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal-overlay.active .modal {
+  transform: translateY(0);
+}
+
+/* Modal Header */
+.modal-header {
+  text-align: center;
+  margin-bottom: var(--spacing-large);
+}
+
+.modal-header h2 {
+  color: var(--color-text);
+  font-size: var(--font-size-heading);
+  margin: 0;
+}
+
+/* Close Button */
+.modal-close {
+  position: absolute;
+  top: var(--spacing-medium);
+  right: var(--spacing-medium);
+  background: transparent;
+  border: none;
+  font-size: 1.5em;
+  color: var(--color-text-light);
+  cursor: pointer;
+  padding: 5px;
+  transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+  color: var(--color-text);
+}
+
+/* Modal Form */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium);
+}
+
+.form-group {
+  position: relative;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px var(--spacing-medium);
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-size: 1em;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* Submit Button */
+.modal-submit {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 12px;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 50%;
+  width: 200px;
+  translate: -50%;
+  margin-top: var(--spacing-medium);
+}
+
+.modal-submit:hover {
+  background-color: var(--color-primary-light);
+}
+
+/* Additional Links */
+.modal-links {
+  margin-top: var(--spacing-medium);
+  text-align: center;
+  font-size: 0.9em;
+}
+
+.modal-links a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.modal-links a:hover {
+  color: var(--color-primary-light);
+}
+
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .profile-header {
@@ -415,9 +555,16 @@ footer nav ul li a {
     grid-template-columns: 2fr 1fr;
   }
 
-  .search-input{
+  .search-input {
     display: none;
   }
-
-
+    .modal {
+    margin: var(--spacing-medium);
+    padding: var(--spacing-medium);
+  }
+  
+  .social-login {
+    flex-direction: column;
+  }
 }
+
