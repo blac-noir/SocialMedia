@@ -1,7 +1,8 @@
 // forms.js
 
 import * as api from "./api.js";
-import { showModal, hideModal } from "./ui.js";
+import * as utils from "./utils.js";
+import { hideModal } from "./ui.js";
 
 function createLoginForm() {
   // Creates and returns the login form element
@@ -16,6 +17,10 @@ function createLoginForm() {
             </div>
             <div class="form-group">
               <input type="password" placeholder="Password" id="login-password" required>
+            </div>
+            <div class="form-group" align='center'>
+              <div class="loader"></div>
+              <p style="color:red;display:none;">Login failed. Please check your credentials.</p>
             </div>
             <button type="submit" class="modal-submit">Log In</button>
           </form>
@@ -33,14 +38,16 @@ async function handleLoginSubmit(event) {
   event.preventDefault();
   const email = document.querySelector("#login-email").value;
   const password = document.querySelector("#login-password").value;
+  document.querySelector(".loader").style.display = "block";
 
   try {
     const response = await api.login(email, password);
     console.log("Login successful:", response);
     hideModal();
   } catch (error) {
+    document.querySelector(".loader").style.display = "none";
+    document.querySelector(".form-group p").style.display = "block";
     console.error("Login failed:", error);
-    alert("Login failed. Please check your credentials.");
   }
 }
 
@@ -61,6 +68,10 @@ function createRegisterForm() {
           <div class="form-group">
             <input type="password" id="register-password" placeholder="Password" id="login-password" required>
           </div>
+          <div class="form-group" align='center'>
+              <div class="loader"></div>
+              <p style="color:red;display:none;">Registration failed. Please try again.</p>
+          </div>
           <button type="submit" class="modal-submit">Register</button>
         </form>
         </div>
@@ -72,17 +83,24 @@ function createRegisterForm() {
 async function handleRegisterSubmit(event) {
   //Handles the registration form submissions
   event.preventDefault();
-  const name = document.querySelector("#register-name").value;
-  const email = document.querySelector("#register-email").value;
-  const password = document.querySelector("#register-password").value;
+  const name = document.querySelector("#register-name").value.toLowerCase();
+  const email = document.querySelector("#register-email").value.toLowerCase();
+  const password = document
+    .querySelector("#register-password")
+    .value.toLowerCase();
+  document.querySelector(".loader").style.display = "block";
+
 
   try {
     const response = await api.register(name, email, password);
+    await api.login(email, password);
     console.log("Registration successful:", response);
     hideModal();
   } catch (error) {
+    document.querySelector(".loader").style.display = "none";
+    document.querySelector(".form-group p").style.display = "block";
     console.error("Registration failed:", error);
-    alert("Registration failed. Please try again.");
+    // alert("Registration failed. Please try again.");
   }
 }
 
@@ -128,7 +146,9 @@ function createEditProfileForm(userData) {
       <h2>Edit Profile</h2>
       <div class="form-group">
         <label for="edit-name">Username:</label>
-        <input type="text" id="edit-name" value="${userData.name}" required>
+        <input type="text" id="edit-name" value="${utils.capitalize(
+          userData.name
+        )}" required>
       </div>
       <div class="form-group">
         <label for="edit-email">Email:</label>
@@ -146,12 +166,13 @@ function createEditProfileForm(userData) {
 
 async function handleEditProfileSubmit(event) {
   event.preventDefault();
-  const name = document.querySelector("#edit-name").value;
-  const email = document.querySelector("#edit-email").value;
+  const userId = Number(JSON.parse(localStorage.getItem("user")).user_id);
+  const name = document.querySelector("#edit-name").value.toLowerCase();
+  const email = document.querySelector("#edit-email").value.toLowerCase();
   const bio = document.querySelector("#edit-bio").value;
 
   try {
-    const response = await api.updateProfile({
+    const response = await api.updateProfile(userId, {
       name: name,
       email: email,
       bio: bio,

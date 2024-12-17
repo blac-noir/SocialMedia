@@ -1,8 +1,10 @@
 // ui.js
+import * as api from "./api.js";
+import * as state from "./state.js";
+import * as script from "./script.js";
+
 const modalContainer = document.querySelector(".modal-overlay");
 const modalContent = document.querySelector("#modal-form-container");
-const modalCloseButton = document.querySelector(".modal-close");
-const tooltip = document.querySelector(".tooltip");
 
 function showModal(form) {
   //Shows the modal with the provided form
@@ -19,18 +21,79 @@ function handleCloseModal() {
   // Closes modal from close button click
   hideModal();
 }
-function showTooltip(element, message) {
-  //Shows a tooltip with a given message
-  tooltip.textContent = message;
-  const rect = element.getBoundingClientRect();
-  tooltip.style.left = `${rect.left + window.scrollX}px`;
-  tooltip.style.top = `${rect.bottom + window.scrollY + 10}px`;
-  tooltip.setAttribute("aria-hidden", "false"); // Make the tooltip visible for screen readers
-  tooltip.classList.add("visible");
+
+async function handleLikeClick(event) {
+  // Handles liking a post
+  if (event.target.classList.contains("like-button")) {
+    const postId = event.target.dataset.postId;
+    const likeText = event.target.querySelector(".like-text");
+    const likeCount = event.target.querySelector(".like-count");
+    const likedText = event.target.querySelector(".liked-text");
+    try {
+      if (event.target.classList.contains("liked")) {
+        // User unliked the post
+        event.target.classList.remove("liked"); // Remove 'liked' class
+
+        // Unlike Animation
+        likeCount.classList.add("slideDown");
+
+        likeCount.addEventListener(
+          "animationend",
+          () => {
+            const currentLikes = Number(likeCount.innerHTML);
+            likeCount.innerHTML = currentLikes > 0 ? currentLikes - 1 : 0;
+
+            likeCount.classList.remove("slideDown");
+            likedText.classList.remove("show");
+            likeText.classList.remove("moveUp");
+          },
+          { once: true }
+        );
+
+        console.log(`Post ${postId} unliked`);
+        // Send an API call to mark as unliked
+        await api.unlikePost(postId);
+      } else {
+        // User liked the post
+        event.target.classList.add("liked"); // Add 'liked' class
+        // Like Animation
+        likeText.classList.add("moveUp");
+        likeCount.classList.add("slideUp");
+
+        const currentLikes = parseInt(likeCount.innerHTML);
+        // Increase count after like animation
+        likeText.addEventListener(
+          "animationend",
+          () => {
+            event.target.classList.add("liked");
+            likeCount.innerHTML = currentLikes + 1;
+            likedText.classList.add("show"); // Show liked text once animation finishes
+          },
+          { once: true }
+        );
+
+        console.log(`Post ${postId} liked`);
+        // Send an API call to mark as liked
+        await api.likePost(postId);
+      }
+    } catch (error) {
+      console.error("Failed to like the post: ", error);
+    }
+  }
 }
 
-function hideTooltip() {
-  tooltip.setAttribute("aria-hidden", "true");
-  tooltip.classList.remove("visible");
+async function handleCommentClick(event) {
+  // Handles clicking comment button on a post
+  if (event.target.classList.contains("comment-button")) {
+    const postId = event.target.dataset.postId;
+    window.location.href = `post.html?id=${postId}`; // Redirect to post page with the post id
+  }
 }
-export { showModal, hideModal, handleCloseModal, showTooltip, hideTooltip };
+
+export {
+  showModal,
+  hideModal,
+  handleCloseModal,
+  handleLikeClick,
+  handleCommentClick,
+};

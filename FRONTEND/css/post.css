@@ -1,0 +1,158 @@
+/* Post Styles */
+.post {
+  background: var(--color-white);
+  padding: 16px;
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-large);
+  box-shadow: var(--box-shadow);
+}
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-medium);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--spacing-small);
+  border-radius: 5px;
+}
+.post-author-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+}
+.post-author-pic {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.post-date {
+  font-size: 0.8em;
+  color: var(--color-text-light);
+}
+.post-content {
+  margin-bottom: var(--spacing-medium);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #eaf3f3;
+  border-radius: 5px;
+}
+.post-image {
+  margin-top: var(--spacing-medium);
+  border-radius: var(--border-radius);
+}
+.post-text {
+  font-family: math, "Lora", serif;
+  font-size: 18px;
+  line-height: 1.6;
+  text-align: center;
+}
+.post-footer {
+  display: flex;
+  gap: 3px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: none;
+  border-radius: 8px;
+}
+.post-footer button {
+  background-color: var(--color-background);
+  color: var(--color-text-light);
+  fill: var(--color-text-light);
+  font-size: 1.2em;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-medium);
+  gap: 5px;
+  box-shadow: none;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.like-button svg,
+.comment-button svg {
+  width: 20px;
+  transition: all .3s ease;
+}
+.post-footer button:hover,
+.post-footer button.liked {
+  color: var(--color-primary);
+  fill: var(--color-primary);
+}
+/* Liking Effects */
+.like-text,
+.liked-text,
+.like-count {
+    transition: all 0.3s ease;
+}
+
+.liked-text {
+    display: none; /* Hidden by default */
+    opacity: 0;
+}
+
+.liked-text.show {
+    display: inline; /* Show the text */
+    opacity: 1;
+    animation: fadeIn 0.3s forwards;
+}
+
+.like-count {
+    opacity: 1;
+}
+
+.moveUp {
+    animation: moveUp 0.5s forwards;
+}
+
+.slideUp {
+    animation: slideUp 1s forwards;
+}
+
+.slideDown{
+    animation: slideDown 1s forwards;
+}
+
+
+@keyframes moveUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+}

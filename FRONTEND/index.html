@@ -6,20 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home - Connecto</title>
   <link rel="stylesheet" href="css/styles.css" />
-  <!-- Link your CSS here -->
+  <link rel="stylesheet" href="css/modal.css" />
+  <link rel="stylesheet" href="css/post.css" />
+  <link rel="stylesheet" href="css/profile.css" />
 </head>
 
 <body>
   <!-- Modal Container (Hidden by Default) -->
-<div class="modal-overlay">
-  <div class="modal">
-    <button class="modal-close">&times;</button>
+  <div class="modal-overlay">
+    <div class="modal">
+      <button class="modal-close">&times;</button>
       <div id="modal-form-container">
         <!-- Forms will be placed here dynamically by JavaScript -->
       </div>
     </div>
   </div>
-  
+
   <header>
     <nav>
       <div class="logo">
@@ -34,8 +36,20 @@
       </ul>
       <div class="search-bar">
         <input type="text" class="search-input" placeholder="Search..." />
-        <button>Search</button>
+        <div class="search-button"><svg height="16px" width="16px" version="1.1" id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 490.4 490.4"
+            xml:space="preserve">
+            <g>
+              <path
+                d="M484.1,454.796l-110.5-110.6c29.8-36.3,47.6-82.8,47.6-133.4c0-116.3-94.3-210.6-210.6-210.6S0,94.496,0,210.796
+        		s94.3,210.6,210.6,210.6c50.8,0,97.4-18,133.8-48l110.5,110.5c12.9,11.8,25,4.2,29.2,0C492.5,475.596,492.5,463.096,484.1,454.796z
+        		 M41.1,210.796c0-93.6,75.9-169.5,169.5-169.5s169.6,75.9,169.6,169.5s-75.9,169.5-169.5,169.5S41.1,304.396,41.1,210.796z">
+              </path>
+            </g>
+          </svg>
+        </div>
       </div>
+      <button class="create-post-button">Add Post</button>
       <div class="auth-links">
         <button class="login-button">Login</button>
         <button class="register-button">Register</button>
@@ -47,28 +61,8 @@
     <div class="container">
       <section class="feed">
         <!-- Dynamically populated post articles using JavaScript -->
-        <!-- Example post structure -->
-        <article class="post">
-          <header class="post-header">
-            <div class="post-author-info">
-              <img src="images/author.png" alt="Author's Profile Picture" class="post-author-pic" />
-              <h3 class="post-author-name">Author Name</h3>
-            </div>
-            <time class="post-date" datetime="2024-07-26">July 26, 2024</time>
-          </header>
-          <div class="post-content">
-            <p>This is the post content.</p>
-            <img src="images/post_image.png" alt="Post Image" class="post-image" />
-          </div>
-          <footer class="post-footer">
-            <button>Like</button>
-            <button>Comment</button>
-          </footer>
-        </article>
-        <!-- More articles dynamically added here -->
       </section>
       <aside class="sidebar">
-        <!-- Optional: Suggested Users, Trends, etc -->
         <h3>Suggestions</h3>
         <ul id="suggestion-list">
           <li>
@@ -78,17 +72,9 @@
           </li>
           <!-- more suggested users -->
         </ul>
-
-        <h3>Trends</h3>
-        <ul id="trends-list">
-          <li>Trend 1</li>
-          <!-- more trends -->
-        </ul>
       </aside>
     </div>
 
-
-    <div class="tooltip" role="tooltip" aria-hidden="true"></div>
   </main>
 
   <footer>
@@ -101,12 +87,13 @@
     </nav>
   </footer>
   <script type="module" src="js/script.js"></script>
-  <!-- Link your main script here -->
   <script type="module" src="js/api.js"></script>
   <script type="module" src="js/dom.js"></script>
   <script type="module" src="js/state.js"></script>
   <script type="module" src="js/forms.js"></script>
   <script type="module" src="js/ui.js"></script>
+  <script type="module" src="js/utils.js"></script>
+  <script type="module" src="js/profile.js"></script>
 </body>
 
 </html>

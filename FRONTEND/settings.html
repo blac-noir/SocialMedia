@@ -1,65 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Settings - Connecto</title>
-    <link rel="stylesheet" href="css/styles.css" />
-  </head>
-  <body>
-    <header>
-      <nav>
-        <div class="logo">
-          <a href="index.html">
-            <img src="images/logo.svg" alt="Connecto" />
-          </a>
-        </div>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="profile.html">Profile</a></li>
-          <li><a href="settings.html">Settings</a></li>
-        </ul>
-        <div class="search-bar">
-          <input type="text" placeholder="Search..." />
-          <button>Search</button>
-        </div>
-      </nav>
-    </header>
-    <main>
-      <div class="container">
-        <section class="settings-form">
-          <h2>User Settings</h2>
-          <form>
-            <div class="setting-item">
-              <label for="name">User Name:</label>
-              <input type="text" id="name" value="User Name" />
-            </div>
-            <div class="setting-item">
-              <label for="email">Email:</label>
-              <input type="email" id="email" value="user@email.com" />
-            </div>
-            <div class="setting-item">
-              <label for="bio">Bio:</label>
-              <textarea id="bio">User bio here</textarea>
-            </div>
-            <div class="setting-item">
-              <label for="password">Change Password:</label>
-              <input type="password" id="password" />
-            </div>
-            <button type="submit">Save Changes</button>
-          </form>
-        </section>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings - Connecto</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/modal.css" />
+  <link rel="stylesheet" href="css/post.css" />
+  <link rel="stylesheet" href="css/profile.css" />
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <a href="index.html">
+          <img src="images/logo.svg" alt="Connecto" />
+        </a>
       </div>
-    </main>
-    <footer>
-      <p>© 2024 Connecto. All rights reserved.</p>
-      <nav>
-        <ul>
-          <li><a href="#">Terms of Service</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-        </ul>
-      </nav>
-    </footer>
-    <script src="script.js"></script>
-  </body>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="settings.html">Settings</a></li>
+      </ul>
+      <div class="search-bar">
+        <input type="text" class="search-input" placeholder="Search..." />
+        <div class="search-button"><svg height="16px" width="16px" version="1.1" id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 490.4 490.4"
+            xml:space="preserve">
+            <g>
+              <path
+                d="M484.1,454.796l-110.5-110.6c29.8-36.3,47.6-82.8,47.6-133.4c0-116.3-94.3-210.6-210.6-210.6S0,94.496,0,210.796
+              		s94.3,210.6,210.6,210.6c50.8,0,97.4-18,133.8-48l110.5,110.5c12.9,11.8,25,4.2,29.2,0C492.5,475.596,492.5,463.096,484.1,454.796z
+              		 M41.1,210.796c0-93.6,75.9-169.5,169.5-169.5s169.6,75.9,169.6,169.5s-75.9,169.5-169.5,169.5S41.1,304.396,41.1,210.796z">
+              </path>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="container">
+      <section class="settings-form">
+        <h2>User Settings</h2>
+        <form>
+          <div class="setting-item">
+            <label for="name">User Name:</label>
+            <input type="text" id="name" value="User Name" />
+          </div>
+          <div class="setting-item">
+            <label for="email">Email:</label>
+            <input type="email" id="email" value="user@email.com" />
+          </div>
+          <div class="setting-item">
+            <label for="bio">Bio:</label>
+            <textarea id="bio">User bio here</textarea>
+          </div>
+          <div class="setting-item">
+            <label for="password">Change Password:</label>
+            <input type="password" id="password" />
+          </div>
+          <button type="submit">Save Changes</button>
+          <button type="button" class="logout-button">Logout</button>
+        </form>
+      </section>
+    </div>
+  </main>
+  <footer>
+    <p>© 2024 Connecto. All rights reserved.</p>
+    <nav>
+      <ul>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </nav>
+  </footer>
+  <script type="module" src="js/script.js"></script>
+  <script type="module" src="js/api.js"></script>
+  <script type="module" src="js/state.js"></script>
+  <script type="module" src="js/forms.js"></script>
+  <script type="module" src="js/ui.js"></script>
+  <script type="module" src="js/utils.js"></script>
+  <script type="module" src="js/profile.js"></script>
+</body>
+
 </html>
