@@ -1,7 +1,5 @@
 // ui.js
 import * as api from "./api.js";
-import * as state from "./state.js";
-import * as script from "./script.js";
 
 const modalContainer = document.querySelector(".modal-overlay");
 const modalContent = document.querySelector("#modal-form-container");
@@ -24,7 +22,10 @@ function handleCloseModal() {
 
 async function handleLikeClick(event) {
   // Handles liking a post
-  if (event.target.classList.contains("like-button")) {
+  if (
+    event.target.classList.contains("like-button") ||
+    event.target.classList.contains("child")
+  ) {
     const postId = event.target.dataset.postId;
     const likeText = event.target.querySelector(".like-text");
     const likeCount = event.target.querySelector(".like-count");
@@ -90,10 +91,74 @@ async function handleCommentClick(event) {
   }
 }
 
+function setupImageUploader(
+  inputElementId = "imageUpload",
+  previewElementId = "previewImage",
+  containerElementSelector = ".image-upload-container",
+  uploadIconSelector = ".upload-icon"
+) {
+  const imageUploadInput = document.getElementById(inputElementId);
+  const previewImage = document.getElementById(previewElementId);
+  const imageUploadContainer = document.querySelector(containerElementSelector);
+  const uploadIcon = document.querySelector(uploadIconSelector);
+  const imageUploadlabel = document.querySelector(".image-upload-label");
+
+  if (
+    !imageUploadInput ||
+    !previewImage ||
+    !imageUploadContainer ||
+    !uploadIcon
+  ) {
+    console.error("Image uploader elements not found. Check your selectors.");
+    return;
+  }
+
+  imageUploadInput.addEventListener("change", function () {
+    const file = this.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        previewImage.src = e.target.result;
+        previewImage.style.display = "block";
+        imageUploadContainer.style.borderColor = "#227bb6";
+        uploadIcon.style.color = "#227bb6";
+        imageUploadlabel.setAttribute(
+          "style",
+          `
+display: flex;
+flex-direction: column;
+align-items: center;
+cursor: pointer;
+opacity: 0;
+position: absolute;
+width: 100%;
+height: 100%;
+`
+        );
+      };
+      reader.readAsDataURL(file);
+    } else {
+      imageUploadlabel.setAttribute(
+        "style",
+        `display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;`
+      );
+      previewImage.src = "";
+      previewImage.style.display = "none";
+      imageUploadContainer.style.borderColor = "#ddd";
+      uploadIcon.style.color = "#888";
+    }
+  });
+}
+
 export {
   showModal,
   hideModal,
   handleCloseModal,
   handleLikeClick,
   handleCommentClick,
+  setupImageUploader,
 };

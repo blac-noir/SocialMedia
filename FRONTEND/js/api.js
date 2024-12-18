@@ -175,16 +175,25 @@ function logout() {
 }
 
 //
-async function createPost(content, image) {
-  return fetchData(`/posts`, {
+async function createPost(content, image, userId) {
+  const contentPost = fetchData(`/posts?userId=${userId}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ content: content, image: image }),
+    body: JSON.stringify({ content: content, image: image || "" }),
   });
+  const imagePost = fetchData(`/post/upload?userId=${userId}`, {
+    method: "POST",
+    body: image,
+  });
+  return JSON.stringify({ content: contentPost, image: imagePost });
 }
 async function getPosts(page = 1) {
   // Fetches posts for the home page feed
   return fetchData(`/posts?page=${page}`);
+}
+async function delPosts(postId) {
+  // Fetches posts for the home page feed
+  return fetchData(`/posts/${postId}`, { method: "DELETE" });
 }
 async function getUserPosts(userId) {
   // Fetches posts for a user's profile
@@ -196,17 +205,17 @@ async function getSinglePost(postId) {
 }
 async function likePost(postId) {
   // Likes a post
-  return fetchData(`/posts/${postId}/like`, { method: "POST" });
+  return fetchData(`/posts/${postId}/like`, { method: "PATCH" });
 }
 async function unlikePost(postId) {
   // Likes a post
-  return fetchData(`/posts/${postId}/unlike`, { method: "POST" });
+  return fetchData(`/posts/${postId}/unlike`, { method: "PATCH" });
 }
 
-async function addComment(postId, commentText) {
+async function addComment(postId, commentText, userId) {
   console.log(JSON.stringify({ text: commentText }));
   // Adds a comment to a post
-  return fetchData(`/posts/${postId}/comments?userId=1`, {
+  return fetchData(`/posts/${postId}/comments/${userId}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -233,6 +242,30 @@ async function updateProfile(userId, profileData) {
   });
 }
 
+async function fetchImages(userId) {
+  return fetchData(`/post/upload/${userId}`);
+  try {
+    const response = await fetch(form.action);
+    if (response.ok) {
+      const imageNames = await response.json();
+
+      imageContainer.innerHTML = "";
+      imageNames.forEach((imageName) => {
+        const imagePath = "uploaded_images/" + imageName; // Construct the image URL
+        const imageElement = document.createElement("img");
+        imageElement.src = imagePath;
+        imageElement.style.maxWidth = "200px";
+        imageElement.style.margin = "10px";
+        imageContainer.appendChild(imageElement);
+      });
+    } else {
+      console.error("Error fetching image names:", response.statusText);
+    }
+  } catch (error) {
+    console.error("Error fetching image names:", error);
+  }
+}
+
 export {
   createPost,
   getPosts,
@@ -250,4 +283,5 @@ export {
   logout,
   isLoggedIn,
   getUser,
+  delPosts,
 };

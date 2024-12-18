@@ -76,7 +76,7 @@
 .like-button svg,
 .comment-button svg {
   width: 20px;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 .post-footer button:hover,
 .post-footer button.liked {
@@ -87,72 +87,157 @@
 .like-text,
 .liked-text,
 .like-count {
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .liked-text {
-    display: none; /* Hidden by default */
-    opacity: 0;
+  display: none; /* Hidden by default */
+  opacity: 0;
 }
 
 .liked-text.show {
-    display: inline; /* Show the text */
-    opacity: 1;
-    animation: fadeIn 0.3s forwards;
+  display: inline; /* Show the text */
+  opacity: 1;
+  animation: fadeIn 0.3s forwards;
 }
 
 .like-count {
-    opacity: 1;
+  opacity: 1;
 }
 
 .moveUp {
-    animation: moveUp 0.5s forwards;
+  animation: moveUp 0.5s forwards;
 }
 
 .slideUp {
-    animation: slideUp 1s forwards;
+  animation: slideUp 1s forwards;
 }
 
-.slideDown{
-    animation: slideDown 1s forwards;
+.slideDown {
+  animation: slideDown 1s forwards;
 }
-
 
 @keyframes moveUp {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-20px);
-        opacity: 0;
-    }
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
 }
 
 @keyframes slideUp {
-    0% {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes fadeIn {
-    100% {
-        opacity: 1;
-    }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes slideDown {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(20px);
-        opacity: 0;
-    }
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+}
+
+/* Upload post design */
+
+.post-container h2 {
+  text-align: center;
+}
+
+.post-container .form-group {
+  margin-bottom: 15px;
+}
+
+.post-container .form-group label {
+  margin-bottom: 5px;
+}
+
+.post-container textarea {
+  width: calc(100% - 10px);
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.post-container button {
+  display: block;
+  width: 70%;
+  margin: auto;
+}
+.post-container button:hover {
+  background-color: #227bb6;
+}
+
+/* Image Uploader Styling */
+.image-upload-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.image-upload-input {
+  display: none;
+}
+
+.image-upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.upload-icon {
+  font-size: 3rem;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+.upload-text {
+  font-size: 1rem;
+  color: #777;
+}
+.image-upload-label:hover .upload-icon {
+  color: #555;
+}
+.image-upload-label:hover .upload-text {
+  color: #333;
+}
+
+.image-preview {
+  margin-top: 15px;
+  max-width: 100%;
+  max-height: 300px;
+  overflow: hidden;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  display: none;
+  object-fit: contain;
 }

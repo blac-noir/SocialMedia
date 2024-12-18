@@ -245,6 +245,10 @@ footer nav ul li a {
     grid-template-columns: 2fr 1fr;
   }
 
+  .search-bar {
+    padding: 7px 15px;
+  }
+
   .search-input {
     display: none;
   }

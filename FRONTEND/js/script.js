@@ -16,6 +16,7 @@ document.addEventListener("click", function (event) {
   }
   if (event.target.classList.contains("create-post-button")) {
     ui.showModal(forms.createPostForm());
+    ui.setupImageUploader();
   }
   if (event.target.classList.contains("edit-profile-button")) {
     //get user profile and create the edit profile form
@@ -89,12 +90,13 @@ async function loadSinglePost(postId) {
       dom.appendComment(commentContainer, comment);
     });
 
+    const userId = Number(JSON.parse(localStorage.getItem("user")).user_id);
     const commentForm = document.querySelector(".comment-form");
     const commentButton = document.querySelector(".comment-button2");
     commentButton.addEventListener("click", async (event) => {
       const commentText = commentForm.querySelector("textarea").value; // get comment text
       try {
-        const newComment = await api.addComment(postId, commentText); //post a comment
+        const newComment = await api.addComment(postId, commentText, userId); //post a comment
         dom.appendComment(commentContainer, newComment); // Append new comment
         commentForm.querySelector("textarea").value = ""; //clear comment input
       } catch (error) {
@@ -111,7 +113,7 @@ function handleInfiniteScroll() {
   const scrollBottom =
     document.documentElement.scrollHeight -
     document.documentElement.clientHeight;
-  const scrolled = window.sclocrollY;
+  const scrolled = window.scrollY;
 
   if (scrollBottom - scrolled <= 200 && !state.getAppState().loading) {
     // Load more when near bottom and not already loading

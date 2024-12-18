@@ -38,9 +38,9 @@ function createPostElement(post, single = false) {
         <footer class="post-footer">
             <button class="like-button" data-post-id="${post.id}">
             ${likeSvg}
-            <span class="like-text">Like</span>
-            <span class="like-count">${post.likes}</span>
-            <span class="liked-text">Liked</span>
+            <span class="child like-text">Like</span>
+            <span class="child like-count">${post.likes}</span>
+            <span class="child liked-text">Liked</span>
             </button>
             <button class="comment-button" data-post-id="${post.id}">
             ${commentSvg}
@@ -56,7 +56,7 @@ function createCommentElement(comment) {
   const commentDiv = document.createElement("div");
   commentDiv.classList.add("comment");
   commentDiv.innerHTML = `<p>${utils.capitalize(comment.author.name)}: ${
-    comment.text
+    comment.text ? comment.text : comment.comments[0].text
   }</p>`;
   return commentDiv;
 }

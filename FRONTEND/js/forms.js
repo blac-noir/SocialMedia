@@ -2,7 +2,7 @@
 
 import * as api from "./api.js";
 import * as utils from "./utils.js";
-import { hideModal } from "./ui.js";
+import * as ui from "./ui.js";
 
 function createLoginForm() {
   // Creates and returns the login form element
@@ -43,7 +43,7 @@ async function handleLoginSubmit(event) {
   try {
     const response = await api.login(email, password);
     console.log("Login successful:", response);
-    hideModal();
+    ui.hideModal();
   } catch (error) {
     document.querySelector(".loader").style.display = "none";
     document.querySelector(".form-group p").style.display = "block";
@@ -90,12 +90,11 @@ async function handleRegisterSubmit(event) {
     .value.toLowerCase();
   document.querySelector(".loader").style.display = "block";
 
-
   try {
     const response = await api.register(name, email, password);
     await api.login(email, password);
     console.log("Registration successful:", response);
-    hideModal();
+    ui.hideModal();
   } catch (error) {
     document.querySelector(".loader").style.display = "none";
     document.querySelector(".form-group p").style.display = "block";
@@ -108,16 +107,27 @@ function createPostForm() {
   //Creates and returns the new post form
   const form = document.createElement("form");
   form.innerHTML = `
+    <div class="post-container">
       <h2>Create a new Post</h2>
       <div class="form-group">
-           <label for="post-content">Content:</label>
-           <textarea id="post-content" required></textarea>
+        <label for="post-content">Content:</label>
+        <textarea id="post-content" required=""></textarea>
       </div>
-       <div class="form-group">
-        <label for="post-image">Image URL (Optional):</label>
-         <input type="text" id="post-image">
-       </div>
+      <div class="form-group">
+        <label for="imageUpload">Image (Optional):</label>
+        <div class="image-upload-container">
+          <input type="file" id="imageUpload" accept="image/*" class="image-upload-input">
+          <div class="image-preview">
+            <img id="previewImage" src="" alt="Image Preview">
+          </div>
+          <label for="imageUpload" class="image-upload-label">
+            <span class="upload-icon">+</span>
+            <span class="upload-text">Choose an image</span>
+          </label>
+        </div>
+      </div>
       <button type="submit">Post</button>
+    </div>
       `;
   form.addEventListener("submit", handlePostSubmit);
   return form;
@@ -125,14 +135,15 @@ function createPostForm() {
 
 async function handlePostSubmit(event) {
   event.preventDefault();
+  const userId = Number(JSON.parse(localStorage.getItem("user")).user_id);
   const content = document.querySelector("#post-content").value;
-  const image = document.querySelector("#post-image").value;
+  const image = document.querySelector("#imageUpload").value;
 
   try {
-    const newPost = await api.createPost(content, image);
+    const newPost = await api.createPost(content, image, userId);
     console.log("New Post Created", newPost);
-    hideModal();
-    window.location.reload();
+    ui.hideModal();
+    // window.location.reload();
   } catch (error) {
     console.error("Failed to create the post: ", error);
     alert("Failed to create new post.");
@@ -178,7 +189,7 @@ async function handleEditProfileSubmit(event) {
       bio: bio,
     });
     console.log("Profile update success: ", response);
-    hideModal();
+    ui.hideModal();
     window.location.reload();
   } catch (error) {
     console.error("Failed to update the profile: ", error);

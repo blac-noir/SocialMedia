@@ -12,7 +12,7 @@ function checkLoggedIn() {
   const registerButton = document.querySelector(".register-button");
   const logoutButton = document.querySelector(".logout-button");
   const createButton = document.querySelector(".create-post-button");
-  const settings = document.querySelector('a[href^="se"]');
+  const links = document.querySelector('header nav ul');
 
   if (api.isLoggedIn()) {
     // Hide login/register buttons if the user is logged in
@@ -22,14 +22,14 @@ function checkLoggedIn() {
     if (registerButton) {
       registerButton.style.display = "none";
     }
-    if (settings) {
-      settings.style.display = "inline";
-    }
     if (logoutButton) {
       logoutButton.style.display = "inline-block";
     }
     if (createButton) {
       createButton.style.display = "inline-block";
+    }
+    if (links) {
+      links.style.display = "flex";
     }
   } else {
     if (loginButton) {
@@ -41,11 +41,11 @@ function checkLoggedIn() {
     if (logoutButton) {
       logoutButton.style.display = "none";
     }
-    if (settings) {
-      settings.style.display = "none";
-    }
     if (createButton) {
       createButton.style.display = "none";
+    }
+    if (links) {
+      links.style.display = "none";
     }
   }
 }
