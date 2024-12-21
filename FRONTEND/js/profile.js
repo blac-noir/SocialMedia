@@ -12,7 +12,8 @@ function checkLoggedIn() {
   const registerButton = document.querySelector(".register-button");
   const logoutButton = document.querySelector(".logout-button");
   const createButton = document.querySelector(".create-post-button");
-  const links = document.querySelector('header nav ul');
+  const links = document.querySelector("header nav ul");
+  const commentForm = document.querySelector(".comment-form");
 
   if (api.isLoggedIn()) {
     // Hide login/register buttons if the user is logged in
@@ -28,6 +29,9 @@ function checkLoggedIn() {
     if (createButton) {
       createButton.style.display = "inline-block";
     }
+    if (commentForm) {
+      createButton.style.display = "grid";
+    }
     if (links) {
       links.style.display = "flex";
     }
@@ -42,6 +46,9 @@ function checkLoggedIn() {
       logoutButton.style.display = "none";
     }
     if (createButton) {
+      createButton.style.display = "none";
+    }
+    if (commentForm) {
       createButton.style.display = "none";
     }
     if (links) {
@@ -140,11 +147,13 @@ async function handleUpdateProfile(event) {
   const nameInput = document.querySelector("#name");
   const emailInput = document.querySelector("#email");
   const bioTextArea = document.querySelector("#bio");
+  const passwordInput = document.querySelector("#password");
 
   const updateData = {
     name: nameInput.value.toLowerCase(),
     email: emailInput.value.toLowerCase(),
-    bio: bioTextArea.value.toLowerCase(),
+    bio: bioTextArea.value,
+    password: passwordInput.value,
   };
   try {
     await api.updateProfile(userId, updateData);

@@ -1,4 +1,11 @@
 /* Profile Styles - Enhanced */
+div.profile.container{
+  display: grid;
+  grid-template-areas:
+    "profile profile sidebar"
+    "posts posts sidebar";
+}
+
 .profile-info {
   background: var(--color-white);
   padding: 0;
@@ -8,6 +15,8 @@
   position: relative;
   margin-top: 0;
   z-index: -1;
+  grid-area: profile;
+  min-width: 430px;
 }
 
 .profile-header {
@@ -101,6 +110,10 @@
   color: var(--color-primary);
 }
 
+main > div > section.user-posts{
+grid-area: posts;
+}
+
 /* Settings Form Styles */
 .settings-form {
   background: var(--color-white);
@@ -147,6 +160,7 @@
     align-items: center;
     text-align: center;
     padding-bottom: var(--spacing-large);
+    height: 204px;
   }
 
   .profile-pic {

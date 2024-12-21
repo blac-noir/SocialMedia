@@ -93,16 +93,24 @@ async function loadSinglePost(postId) {
     const userId = Number(JSON.parse(localStorage.getItem("user")).user_id);
     const commentForm = document.querySelector(".comment-form");
     const commentButton = document.querySelector(".comment-button2");
-    commentButton.addEventListener("click", async (event) => {
-      const commentText = commentForm.querySelector("textarea").value; // get comment text
-      try {
-        const newComment = await api.addComment(postId, commentText, userId); //post a comment
-        dom.appendComment(commentContainer, newComment); // Append new comment
-        commentForm.querySelector("textarea").value = ""; //clear comment input
-      } catch (error) {
-        console.error("Failed to add the comment: ", error);
-      }
-    });
+    if (api.isLoggedIn()) {
+      commentButton.addEventListener("click", async (event) => {
+        const commentText = commentForm.querySelector("textarea").value.trim(); // get comment text
+        if (commentText !== "") {
+          try {
+            const newComment = await api.addComment(
+              postId,
+              commentText,
+              userId
+            ); //post a comment
+            dom.appendComment(commentContainer, newComment); // Append new comment
+            commentForm.querySelector("textarea").value = ""; //clear comment input
+          } catch (error) {
+            console.error("Failed to add the comment: ", error);
+          }
+        }
+      });
+    }
   } catch (error) {
     console.error("Failed to load post: ", error);
   }
@@ -115,7 +123,11 @@ function handleInfiniteScroll() {
     document.documentElement.clientHeight;
   const scrolled = window.scrollY;
 
-  if (scrollBottom - scrolled <= 200 && !state.getAppState().loading) {
+  if (
+    scrollBottom - scrolled <= 200 &&
+    !state.getAppState().loading &&
+    !location.pathname.startsWith("/post.html")
+  ) {
     // Load more when near bottom and not already loading
     loadPosts(state.getAppState().currentFeed.length + 2); // Assuming 2 posts per page
     console.log("Loading more posts...");

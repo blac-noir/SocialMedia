@@ -1,5 +1,7 @@
 // api.js
-const API_BASE_URL = "http://localhost:8080/sm-backend-1.0-SNAPSHOT/api";
+import { convertImageToBase64 } from "./utils.js";
+
+const API_BASE_URL = "http://localhost:8080/connecto-1.1-SNAPSHOT/api";
 
 // Function to fetch data from the backend
 async function fetchData(url, options = {}) {
@@ -176,16 +178,13 @@ function logout() {
 
 //
 async function createPost(content, image, userId) {
-  const contentPost = fetchData(`/posts?userId=${userId}`, {
+  const imageData = await convertImageToBase64(image);
+  console.log(imageData);
+  return fetchData(`/posts?userId=${userId}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ content: content, image: image || "" }),
+    body: JSON.stringify({ content: content, image: imageData || "" }),
   });
-  const imagePost = fetchData(`/post/upload?userId=${userId}`, {
-    method: "POST",
-    body: image,
-  });
-  return JSON.stringify({ content: contentPost, image: imagePost });
 }
 async function getPosts(page = 1) {
   // Fetches posts for the home page feed
@@ -240,30 +239,6 @@ async function updateProfile(userId, profileData) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(profileData),
   });
-}
-
-async function fetchImages(userId) {
-  return fetchData(`/post/upload/${userId}`);
-  try {
-    const response = await fetch(form.action);
-    if (response.ok) {
-      const imageNames = await response.json();
-
-      imageContainer.innerHTML = "";
-      imageNames.forEach((imageName) => {
-        const imagePath = "uploaded_images/" + imageName; // Construct the image URL
-        const imageElement = document.createElement("img");
-        imageElement.src = imagePath;
-        imageElement.style.maxWidth = "200px";
-        imageElement.style.margin = "10px";
-        imageContainer.appendChild(imageElement);
-      });
-    } else {
-      console.error("Error fetching image names:", response.statusText);
-    }
-  } catch (error) {
-    console.error("Error fetching image names:", error);
-  }
 }
 
 export {

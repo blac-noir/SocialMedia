@@ -94,6 +94,8 @@ textarea {
   font-family: inherit;
   width: 100%;
   box-sizing: border-box;
+  outline: none;
+  resize: vertical;
 }
 
 /* General container for pages */
@@ -101,9 +103,9 @@ textarea {
   max-width: 1200px; /* Adjust as needed */
   margin: 0 auto; /* Center content */
   padding: var(--spacing-medium);
-  display: grid;
-  grid-template-columns: 3fr 1fr; /* wider on desktop */
   gap: var(--spacing-large);
+  z-index:-10000;
+  min-width: 505px;
 }
 
 /* Header styling */
@@ -197,6 +199,8 @@ footer nav ul li a {
   padding: var(--spacing-medium);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
+  grid-area: sidebar;
+  min-width: 230px;
 }
 .sidebar h3 {
   margin-top: 0;

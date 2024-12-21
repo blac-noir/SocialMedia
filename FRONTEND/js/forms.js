@@ -137,13 +137,13 @@ async function handlePostSubmit(event) {
   event.preventDefault();
   const userId = Number(JSON.parse(localStorage.getItem("user")).user_id);
   const content = document.querySelector("#post-content").value;
-  const image = document.querySelector("#imageUpload").value;
+  const image = document.querySelector("#imageUpload");
 
   try {
     const newPost = await api.createPost(content, image, userId);
     console.log("New Post Created", newPost);
     ui.hideModal();
-    // window.location.reload();
+    window.location.reload();
   } catch (error) {
     console.error("Failed to create the post: ", error);
     alert("Failed to create new post.");

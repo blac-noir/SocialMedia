@@ -17,4 +17,29 @@ function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export { formatDate, capitalize };
+// Function to convert image to Base64
+async function convertImageToBase64(fileInput) {
+  return new Promise((resolve, reject) => {
+    const file = fileInput.files[0]; // Get the first selected file
+
+    if (!file) {
+      reject("No file selected.");
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+      const base64String = event.target.result.split(",")[1]; // Extract base64 data
+      resolve(base64String);
+    };
+
+    reader.onerror = function (event) {
+      reject("Error reading file: " + event.target.error.message);
+    };
+
+    reader.readAsDataURL(file); // Start reading the file as a data URL
+  });
+}
+
+export { formatDate, capitalize, convertImageToBase64 };

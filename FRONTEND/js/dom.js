@@ -30,7 +30,7 @@ function createPostElement(post, single = false) {
         <div class="post-content">
             ${
               post.image
-                ? `<img src="${post.image}" alt="Post Image" class="post-image">`
+                ? `<img src="data:image/jpeg;base64,${post.image}" alt="Post Image" class="post-image">`
                 : ``
             }
             <p class='post-text'>${post.content}</p>
